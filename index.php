@@ -19,6 +19,9 @@ switch ($uri) {
     case "login":
         require_once __DIR__ . '/app/views/login.php';
         exit();
+        case "register":
+            require_once __DIR__ . '/app/views/register.php';
+            exit();
     case "dashboard":
         require_once __DIR__ . '/app/views/student/dashboard.php';
         exit();
