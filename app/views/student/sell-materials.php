@@ -95,9 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['receipt'])) {
 
                     <h3 class="text-lg font-semibold mt-2"> <?= htmlspecialchars($material['title']) ?> </h3>
                     <p class="text-gray-600"> <?= nl2br(htmlspecialchars($material['description'])) ?> </p>
-                    <p class="text-blue-600 font-bold mt-2">Price: $<?= htmlspecialchars($material['price']) ?> </p>
-
-                    <p class="text-gray-500 text-sm mt-2">Uploaded by: <span class="font-semibold"><?= htmlspecialchars($material['username']) ?></span></p>
+                    <p class="text-blue-600 font-bold mt-2">Price: <?= htmlspecialchars($material['price']) ?> </p>
+                    <p class="text-gray-500 text-sm mt-2">Uploaded by: 
+    <span class="font-semibold"><?= htmlspecialchars($material['uploader_username']) ?></span>
+</p>
 
                     <?php 
                     $current_user_id = $_SESSION['user_id'];

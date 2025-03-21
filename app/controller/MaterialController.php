@@ -55,18 +55,20 @@ class MaterialController {
         $query = "SELECT m.*, 
                          COALESCE(p.receipt, '') AS receipt, 
                          COALESCE(p.request, 0) AS request, 
-                         COALESCE(u.id, 0) AS buyer_id, 
-                         COALESCE(u.username, '') AS username 
+                         COALESCE(p.user_id, 0) AS buyer_id, 
+                         COALESCE(buyer.username, '') AS buyer_username,
+                         uploader.username AS uploader_username
                   FROM materials m
                   LEFT JOIN purchases p ON m.id = p.material_id
-                  LEFT JOIN users u ON p.user_id = u.id
+                  LEFT JOIN users buyer ON p.user_id = buyer.id  -- Buyer info
+                  LEFT JOIN users uploader ON m.user_id = uploader.id  -- Uploader info
                   ORDER BY m.created_at DESC";
-
+    
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    
  
 
     public function approvePurchase($purchase_id, $user_id) {
